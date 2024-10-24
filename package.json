@@ -1,6 +1,6 @@
 {
-  "name": "casbin-expression-eval",
-  "version": "1.0.0",
+  "name": "@casbin/expression-eval",
+  "version": "5.0.2",
   "description": "JavaScript expression parsing and evaluation.",
   "source": "index.ts",
   "main": "dist/expression-eval.js",
@@ -32,6 +32,7 @@
     "tree",
     "math"
   ],
+  "author": "Node-Casbin",
   "license": "MIT",
   "dependencies": {
     "jsep": "^0.3.0"
