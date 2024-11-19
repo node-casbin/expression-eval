@@ -1,3 +1,10 @@
+# [5.3.0](https://github.com/node-casbin/expression-eval/compare/v5.2.0...v5.3.0) (2024-11-19)
+
+
+### Features
+
+* fix the logic short-circuit bug ([#8](https://github.com/node-casbin/expression-eval/issues/8)) ([7478389](https://github.com/node-casbin/expression-eval/commit/747838927b1b26ca557a2823621cbb18c4bf51e3))
+
 # [5.2.0](https://github.com/node-casbin/expression-eval/compare/v5.1.0...v5.2.0) (2024-10-27)
 
 
