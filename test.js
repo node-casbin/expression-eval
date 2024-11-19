@@ -62,9 +62,9 @@ const fixtures = [
   {expr: '1 >= 2',          expected: false },
 
   // logical expression lazy evaluation
-  {expr: 'true || false',  expected: true  },
+  {expr: 'true || throw()',  expected: true  },
   {expr: 'false || true',    expected: true  },
-  {expr: 'false && true', expected: false  },
+  {expr: 'false && throw()', expected: false  },
   {expr: 'true && false',    expected: false  },
 
   // member expression

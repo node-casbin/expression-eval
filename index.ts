@@ -150,12 +150,13 @@ function evaluate(_node: jsep.Expression, context: object) {
       return node.value;
 
     case 'LogicalExpression':
-      if (node.operator === '||') {
-        return evaluate(node.left, context) || evaluate(node.right, context);
-      } else if (node.operator === '&&') {
-        return evaluate(node.left, context) && evaluate(node.right, context);
+      const leftValue = evaluate(node.left, context);
+      if (node.operator === '||' && leftValue) {
+        return leftValue;
+      } else if (node.operator === '&&' && !leftValue) {
+        return leftValue;
       }
-      return binops[node.operator](evaluate(node.left, context), evaluate(node.right, context));
+      return binops[node.operator](leftValue, evaluate(node.right, context));
 
     case 'MemberExpression':
       return evaluateMember(node, context)[1];
@@ -222,15 +223,17 @@ async function evalAsync(_node: jsep.Expression, context: object) {
 
     case 'LogicalExpression': {
       if (node.operator === '||') {
-        return (
-          (await evalAsync(node.left, context)) ||
-          (await evalAsync(node.right, context))
-        );
+        const left = await evalAsync(node.left, context);
+        if (left) {
+          return left;
+        }
+        return await evalAsync(node.right, context);
       } else if (node.operator === '&&') {
-        return (
-          (await evalAsync(node.left, context)) &&
-          (await evalAsync(node.right, context))
-        );
+        const left = await evalAsync(node.left, context);
+        if (!left) {
+          return left;
+        }
+        return await evalAsync(node.right, context);
       }
 
       const [left, right] = await Promise.all([
